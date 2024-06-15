@@ -1,26 +1,26 @@
-const mongoose = require('mongoose')
-const connect = mongoose.connect("mongodb+srv://tonnel:tonnel@cluster0.eyeqbwd.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+const mongoose = require('mongoose');
 
-//connect to database
-connect.then(() =>{
+const connect = mongoose.connect("mongodb+srv://<username>:<password>@cluster0.eyeqbwd.mongodb.net/<dbname>?retryWrites=true&w=majority");
+
+// Connect to database
+connect.then(() => {
     console.log("Database connected successfully");
-})
-.catch(()=>{
-    console.log("Database cannot be connected");
-})
+}).catch((err) => {
+    console.error("Database connection error: ", err);
+});
 
-//schema
+// Define schema
 const loginSchema = new mongoose.Schema({
     name: {
-        type:String,
-        required:true
+        type: String,
+        required: true
     },
     password: {
-        type:String,
-        required:true
+        type: String,
+        required: true
     }
-})
+});
 
-const collection = new mongoose.model("users", loginSchema)
+const collection = mongoose.model("users", loginSchema);
 
-module.exports = (collection) /* connectDB */
+module.exports = collection;

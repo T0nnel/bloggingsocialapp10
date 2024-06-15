@@ -3,15 +3,16 @@ import "./register.css";
 
 export default function Register() {
     const [username, setUsername] = useState("");
-    const [email, setEmail] = useState(""); // Added email state
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordAgain, setPasswordAgain] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = async (e) => {
+    const handleRegistration = async (e) => {
         e.preventDefault();
 
         if (password !== passwordAgain) {
-            alert("Passwords do not match");
+            setErrorMessage("Passwords do not match");
             return;
         }
 
@@ -21,13 +22,44 @@ export default function Register() {
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ username, email, password }), // Include email in the body
+                body: JSON.stringify({ username, email, password }),
             });
 
-            const data = await response.text();
-            console.log(data); // For demonstration, handle response according to your needs
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data); // Handle successful registration
+                // Redirect or show success message
+            } else {
+                setErrorMessage(data.message); // Display error message
+            }
         } catch (error) {
             console.error("Error:", error);
+            setErrorMessage("Internal Server Error");
+        }
+    };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch("http://localhost:3500/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                console.log(data); // Handle successful login
+                // Redirect or handle logged in state
+            } else {
+                setErrorMessage(data.message); // Display error message
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            setErrorMessage("Internal Server Error");
         }
     };
 
@@ -42,7 +74,7 @@ export default function Register() {
                 </div>
                 <div className="loginRight">
                     <div className="loginBox">
-                        <form onSubmit={handleSubmit}>
+                        <form onSubmit={handleRegistration}>
                             <input
                                 type="text"
                                 placeholder="Username"
@@ -53,7 +85,7 @@ export default function Register() {
                             />
                             <input
                                 type="email"
-                                placeholder="Email" // Email input field
+                                placeholder="Email"
                                 className="loginInput"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -75,12 +107,31 @@ export default function Register() {
                                 onChange={(e) => setPasswordAgain(e.target.value)}
                                 required
                             />
+                            {errorMessage && <p className="errorMessage">{errorMessage}</p>}
                             <button type="submit" className="loginButton">
-                                <a href="/">Sign Up</a>
-                            
+                                Sign Up
                             </button>
-                            <button className="loginRegisterButton">
-                                <a href="/login">Log into Account</a>
+                        </form>
+                        <form onSubmit={handleLogin}>
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                className="loginInput"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                className="loginInput"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
+                            {errorMessage && <p className="errorMessage">{errorMessage}</p>}
+                            <button type="submit" className="loginButton">
+                                Login
                             </button>
                         </form>
                     </div>
