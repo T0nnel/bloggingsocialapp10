@@ -1,0 +1,136 @@
+/* post.css */
+
+/* Container for each individual post */
+.heading-input{
+  padding: 10px;
+  margin-left:5px ;
+
+}
+.content-input{
+padding: 60px;
+margin: 5px;
+}
+.add-post-button{
+  margin-left:10px;
+  color: white;
+  border:none;
+  background-color: green;
+  padding: 10px 20px;
+  border-radius: 10px;
+ 
+}
+.post-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+}
+
+/* Styling for the heading */
+.post-container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+.hide{
+  padding:7px 10px;
+  border: none;
+  color: white;
+  background-color:goldenrod;
+}
+
+/* Styling for the content */
+.post-container p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Interaction buttons (like button) */
+.interaction-buttons {
+  margin-top: 10px;
+}
+
+.interaction-buttons img {
+  cursor: pointer;
+  width: 30px;
+  margin-right: 10px;
+}
+
+.like-count {
+  font-size: 1rem;
+  color: #888;
+}
+
+/* Comment section */
+.comment-section {
+  margin-top: 10px;
+}
+
+.comment-input {
+  width: 60%;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.comment-button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.comment-button:hover {
+  background-color:white;
+  color: black;
+  border: 1px solid blue;
+}
+
+/* Post actions (show/hide comments, delete post) */
+.post-actions {
+  margin-top: 10px;
+}
+
+.delete-button {
+  padding: 5px 10px;
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-left: 10px;
+}
+
+.delete-button:hover {
+  background-color: #c82333; 
+  color: black;
+  border: 1px solid red;
+}
+
+/* Comment list */
+.comment-list {
+  margin-top: 10px;
+}
+
+.comment-list h3 {
+  font-size: 1.2rem;
+  color: #333;
+  font-weight:800;
+  text-decoration: underline;
+}
+
+.comment-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.comment-list ul li {
+  margin-bottom: 5px;
+  color: #666;
+}
